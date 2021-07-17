@@ -1,0 +1,288 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+#sidebar{
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    background-color: #8e44ad;
+    left: -300px;  
+    transition:.4s ease-in;
+    z-index: 2;
+}
+#sidebar.active{
+    left: 0;
+}
+#sidebar ul li{
+    list-style: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 20px 24px;
+  
+    border-bottom: 3px solid white;
+}
+
+.toggle-btn{
+       position: absolute;
+ top: -40px;
+ left: 330px;
+}
+
+.toggle-btn.hidden{
+ opacity: 0.2;
+}
+
+.toggle-btn span{
+    width: 45px;
+    height: 4px;
+    background: #000;
+    display: block;
+    margin-top: 4px;
+
+}
+
+
+.navbar{
+    background-color: #8e44ad;
+    height: auto;
+
+}
+
+.userimg{
+   
+    border-radius:50%;
+  width: 10%;
+ position: relative;
+ left: 300px;
+ 
+}
+
+
+
+.form-design{
+    margin: 10px;
+    padding: 5px;
+}
+
+.form-design label{
+    display: block;
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    color: #fff;
+}
+
+.form-design input{
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    
+}
+
+.form-design input::placeholder{
+    color:#000;
+}
+
+
+ input[type="submit"]{
+
+    width: 80%;
+    padding: 10px;
+    background-color: #8e44ad ;
+    border-radius: 5px;
+    color: #fff;
+       
+}
+
+img[alt="userimage"]{
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+  
+}
+
+.settings{
+    background-color: #000;
+}
+
+.hidden1{
+    display: none;
+}
+
+.bar{
+    width: 70%;
+    height: 20px;
+    background-color: red;
+    margin: 10px;
+}
+
+img[alt="Profileimgage"]{
+      
+    border-radius:50%;
+  width: 80%;
+    padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 30px;
+  
+}
+
+.profile{
+      border:3px solid black;
+
+      border-radius:30px;
+      padding: 50px;
+      margin-top:30px ;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom:  30px;
+    width: 60%;
+    color:#fff;
+    background-color: #000;
+      height: 140%;
+       font-family: 'Times New Roman', Times, serif;
+}
+
+.profile p{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.profile span{
+    font-family: 'Pacifico', cursive;
+}
+
+img[alt="sport"]{
+
+    width: 100%;
+      padding: 5px;
+      border-radius: 5%;
+      margin: 10px;
+    display: block;
+}
+img[alt="music"]{
+    
+    width: 100%;
+      padding: 5px;
+      border-radius: 5%;
+    display: block;
+   
+}
+img[alt="movies"]{
+   
+    width: 100%;
+      padding: 5px;
+      border-radius: 5%;
+    display: block;
+    
+}
+img[alt="books"]{
+  
+    width: 100%;
+      padding: 5px;
+ border-radius: 5%;
+    display: block;
+}
+
+
+figcaption{
+    text-align: right;
+    color: white;
+    font-size: larger;
+    font-family: 'Pacifico', cursive;
+    
+}
+.main{
+    background-color: #000;
+}
+
+.question{
+    
+
+    border-radius:30px;
+    padding: 50px;
+    margin-top:30px ;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:  30px;
+  width: 90%;
+ font-size: 20px;
+ font-weight: bold;
+    height: 140%;
+     font-family: 'Times New Roman', Times, serif;
+     color:#000 ;
+    
+}
+ 
+input[type="radio"]:checked{
+    color: #8e44ad;
+    
+}
+
+label[for="answers"]{
+    font-weight: normal;
+}
+
+.active1{
+    background-color:lavender;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    transition: all 0.5s;
+  }
+
+  .spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 60rem;
+ font-size: 100px;
+  padding: 5rem 6rem;
+ opacity: 0.9;
+  z-index: 1000;
+  transition: all 0.5s;}
+
+.Next{
+    width: 70px;
+    padding: 5px;
+ 
+    background-color: #8e44ad ;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    transform: translate(300%,-70%);
+}
+
+.Prev{
+
+   width: 70px;
+ padding: 5px;
+    background-color: #8e44ad ;
+    border-radius: 5px;
+    color: #fff;
+    margin-top:0px ;
+   text-align: center;
+    position: absolute;
+    transform: translate(190%,-70%);
+}
