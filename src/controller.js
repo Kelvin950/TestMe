@@ -12,10 +12,10 @@ const  controlQuizView = async function(category){
    quizView.renderSpinner();
 
     await model.getquestion(category);
-    model.pushQuestions()
+   
 console.log(model.state.questionArray);
 
-quizView.render(model.pagination(model.state.page) ,model.state ,model.state.questionArray);
+quizView.render(model.pagination(model.state.page) ,model.state.questionArrayDocs , model.state.questionArray,model.state );
 quizView.addCheckAnswersHandler(model.state.questionArray)
 
 
@@ -23,7 +23,7 @@ quizView.addCheckAnswersHandler(model.state.questionArray)
 
 const controlPagination =function(goto){
 
-    quizView.render(model.pagination(goto) ,model.state ,model.state.questionArray);
+    quizView.render(model.pagination(goto),model.state);
 
 }
 

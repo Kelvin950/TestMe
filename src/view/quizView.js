@@ -10,7 +10,8 @@ class QuizView extends View{
   
         this._data = 0 ;
         this.num = [0,0,0,0,0,0,0,0,0,0,0,0];
-
+          this._questions= 0;
+          this._arrayQuestions=0;
     }
 
     addQuizHandler(handler){
@@ -24,10 +25,15 @@ class QuizView extends View{
             handler(category)
         })
     }
-    render(data , state ,questionArray){
+    render(data,questions ,questionArray,state){
+        this._arrayQuestions=questionArray;
+        this._questions =  questions;
 
+        this._pushQuestions();
         this._data =  data;
-        console.log(data);
+       
+        console.log(data, "EW");
+        //call function pushquestion
         const markup  =this._markup();
         this._clear();
             this._setActive();
@@ -72,7 +78,31 @@ class QuizView extends View{
        document.querySelector("body").style.backgroundColor="lavender";
     }
    
-      pushQuestions(){
+      _pushQuestions(){
+ 
+        //loop through the actual array and create templates
+        this._arrayQuestions.forEach((v, index)=>{
+
+           this._questions.push(`<div class="question">
+            <p>${atob(v.question)}</p>
+                <div class="answer">
+                <label>
+                ${v.incorrect_answers.map((i)=>{
+                
+                 return `<div>
+                    <label>
+                 <input type = "radio" name="${index}" value="${atob(i)}" /> <label for="answers">${atob(i)}</label>
+                 </label>
+                 </div> `
+                    
+                    
+                }).join("")}
+               
+                </div>
+                </div>
+            `)
+    
+        })
           //push questions to array
       }
 }

@@ -24,31 +24,6 @@ export const state={
 }
 
 //push questions into new arrray
-export const pushQuestions = function(){
-
-    state.questionArray.forEach((v, index)=>{
-
-        state.questionArrayDocs.push(`<div class="question">
-        <p>${atob(v.question)}</p>
-            <div class="answer">
-            <label>
-            ${v.incorrect_answers.map((i)=>{
-            
-             return `<div>
-                <label>
-             <input type = "radio" name="${index}" value="${atob(i)}" /> <label for="answers">${atob(i)}</label>
-             </label>
-             </div> `
-                
-                
-            }).join("")}
-           
-            </div>
-            </div>
-        `)
-
-    })
-}
 
 
 export const pagination  = function(page =  state.page){
@@ -58,7 +33,7 @@ export const pagination  = function(page =  state.page){
     const start= (state.page-1)*state.numQuestions;
     const end = state.page* state.numQuestions;
 
-    console.log(state.questionArrayDocs);
+    console.log(state.questionArrayDocs ,"WE");
  return state.questionArrayDocs.slice(start , end);
 
 }
