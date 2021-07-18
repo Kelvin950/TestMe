@@ -9,7 +9,7 @@ class QuizView extends View{
         super();
   
         this._data = 0 ;
-      
+        this.num = [0,0,0,0,0,0,0,0,0,0,0,0];
 
     }
 
@@ -24,52 +24,57 @@ class QuizView extends View{
             handler(category)
         })
     }
-    render(data , state){
+    render(data , state ,questionArray){
 
         this._data =  data;
-        const markup  =this._markup()
+        console.log(data);
+        const markup  =this._markup();
         this._clear();
             this._setActive();
             
         this._parentElem.insertAdjacentHTML("afterbegin" , markup);
+      
         paginationView.render(state);
-     
+        
     }
     _markup(){
-        return this._data.map((v , index)=>{
-           
-            return `<div class="question">
-            <p>${atob(v.question)}</p>
-                <div class="answer">
-                <label>
-                ${v.incorrect_answers.map((i)=>{
-                
-                 return `<div>
-                 <input type = "radio" name=${index} value = ${atob(i)}/> <label for="answers">${atob(i)}</label>
-                 </div>`
-                    
-                    
-                }).join("")}
-                </label>
-                </div>
-                </div>
-            `
-            
-        }).join("")
-                          ;
+        return this._data.join(" ");
+        
+                          
 
     }
-       
+       addCheckAnswersHandler(questionArray){
+           document.querySelector(".mainview").addEventListener("click" , (e)=>{
+           if(e.target.type!=="radio")return;
+           console.log(questionArray);
+           console.log(e.target.value , e.target.name);
+               console.log(questionArray[e.target.name]);
+               const obj = questionArray[e.target.name];
+                  if(atob(obj.correct_answer) === e.target.value){
+         
+                         console.log(e.target.name);
+                         this.num[e.target.name] = this.num[e.target.name]+1;
+                         console.log( this.num[e.target.name]);
+                  }else{
+                      if(   this.num[e.target.name] >0)
+                    this.num[e.target.name] = this.num[e.target.name]-1;
+                    console.log( this.num[e.target.name]);
+                  }
+          
+           })
+       }
   
     renderSpinner(){
-        this._spinner.classList.remove("hidden1")
-        this._overlay.classList.remove("hidden1")
+        this._spinner.classList.remove("hidden1");
+        this._overlay.classList.remove("hidden1");
     }
     _setActive(){
        document.querySelector("body").style.backgroundColor="lavender";
     }
    
-
+      pushQuestions(){
+          //push questions to array
+      }
 }
 
 

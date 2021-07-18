@@ -7,7 +7,8 @@ export const state={
     numQuestions:questionsPerPage,
     userdata:{
         
-    }
+    },
+    questionArrayDocs:[],
 }
 
 //get questions from API
@@ -22,14 +23,43 @@ export const state={
    
 }
 
+//push questions into new arrray
+export const pushQuestions = function(){
+
+    state.questionArray.forEach((v, index)=>{
+
+        state.questionArrayDocs.push(`<div class="question">
+        <p>${atob(v.question)}</p>
+            <div class="answer">
+            <label>
+            ${v.incorrect_answers.map((i)=>{
+            
+             return `<div>
+                <label>
+             <input type = "radio" name="${index}" value="${atob(i)}" /> <label for="answers">${atob(i)}</label>
+             </label>
+             </div> `
+                
+                
+            }).join("")}
+           
+            </div>
+            </div>
+        `)
+
+    })
+}
+
 
 export const pagination  = function(page =  state.page){
 
     state.page = page;
 
     const start= (state.page-1)*state.numQuestions;
-    const end = state.page * state.numQuestions;
- return state.questionArray.slice(start , end);
+    const end = state.page* state.numQuestions;
+
+    console.log(state.questionArrayDocs);
+ return state.questionArrayDocs.slice(start , end);
 
 }
 

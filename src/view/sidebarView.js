@@ -52,7 +52,7 @@ class Sidebar extends View{
                 </p>
                   
                 <p>
-                    Difficulty : <span class="difficulty">${(this._data._difficulty)?this._data._difficulty:"easy"}</span>
+                    Difficulty : <span class="difficulty">${(this._data.difficulty)?this._data.difficulty:"easy"}</span>
                 </p>
                 <p>
                     Total Score : 2

@@ -5,6 +5,7 @@ class Pagination{
     constructor(){
         this._parentELem =  document.querySelector("#kel");
       this._data=0
+      
     }
  
     addHandlerPagination(handler){
@@ -14,8 +15,9 @@ class Pagination{
               if(!e.target.classList.contains("buttn"))return
                 console.log(e.target);
               const {goto}  =  e.target.dataset;
-              handler(+goto)
+              handler(+goto);
 
+            
         })
     }
     _markup(){

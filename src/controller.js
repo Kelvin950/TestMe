@@ -12,15 +12,19 @@ const  controlQuizView = async function(category){
    quizView.renderSpinner();
 
     await model.getquestion(category);
+    model.pushQuestions()
 console.log(model.state.questionArray);
 
-quizView.render(model.pagination(model.state.page) ,model.state);
+quizView.render(model.pagination(model.state.page) ,model.state ,model.state.questionArray);
+quizView.addCheckAnswersHandler(model.state.questionArray)
 
 
 }
+
 const controlPagination =function(goto){
 
-    quizView.render(model.pagination(goto) ,model.state);
+    quizView.render(model.pagination(goto) ,model.state ,model.state.questionArray);
+
 }
 
 const controlProfile=function(){
@@ -42,5 +46,6 @@ const controlSettings=  function(){
 paginationView.addHandlerPagination(controlPagination);
 
 quizView.addQuizHandler(controlQuizView);
+//quizView.addCheckAnswersHandler(model.state.questionArray);
 sidebarView.addhandler(controlProfile , controlSettings);
 
