@@ -1,4 +1,6 @@
 
+import quizView from "./quizView"
+import {controlSubmit} from "../controller"
 class Pagination{
 
 
@@ -41,7 +43,7 @@ class Pagination{
          //last page
          if(curPage==numOfpages && numOfpages>1){
              return `<button  data-goto = ${curPage-1} class="Prev buttn">Prev</button>
-             <button class="Next" value= "submit">Submit</button>`
+             <button  class="Next submit" value= "submit">Submit</button>`
          }
 
     }
@@ -51,7 +53,9 @@ class Pagination{
         const markup  =this._markup()
       console.log(this._parentELem);
        this._parentELem.innerHTML=""
-      this._parentELem.insertAdjacentHTML("afterbegin" , markup);
+      this._parentELem.insertAdjacentHTML("afterbegin" , markup)
+      if(this._parentELem.lastChild.classList.contains("submit")){quizView.addHandlerSubmit()}
+      
     }
 
 }

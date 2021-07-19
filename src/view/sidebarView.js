@@ -1,6 +1,7 @@
 
 import View from "./View"
 import photo from "url:../img/photo_2021-07-15_11-12-06.jpg"
+
 class Sidebar extends View{
 
 
@@ -55,7 +56,7 @@ class Sidebar extends View{
                     Difficulty : <span class="difficulty">${(this._data.difficulty)?this._data.difficulty:"easy"}</span>
                 </p>
                 <p>
-                    Total Score : 2
+                ${(this._data.totalScore)?this._data.totalScore:0}
                 </p>
 
                 <div class="bar">
@@ -74,7 +75,7 @@ class Sidebar extends View{
                     <div class="form-design">
                         <label>Username</label>
                         <input type="text" name="username" placeholder="username">
-
+                         
 
                     </div>
                     <div class="form-design">
@@ -86,13 +87,13 @@ class Sidebar extends View{
                     <div class="form-design">
                         <label>Difficulty</label>
                          <select id="difficulty">
-                             <option value="Easy">
+                             <option value="easy">
                                 Easy
                              </option>
-                             <option value="Medium">
+                             <option value="medium">
                                 Medium
                              </option>
-                             <option value="Hard">
+                             <option value="hard">
                                 Hard
                              </option>
                          </select>
@@ -141,6 +142,7 @@ class Sidebar extends View{
         this._clear();
          const markup =  this._markupProfile();
         this._togglebutton();
+        this.hidePagbutton();
          this._parentElem.insertAdjacentHTML("afterbegin" , markup)
 
 
@@ -149,13 +151,25 @@ class Sidebar extends View{
         this._clear();
         this._togglebutton();
         const markup =  this._markupsettings();
+        this.hidePagbutton();
         this._parentElem.insertAdjacentHTML("afterbegin" , markup)
     }
 _togglebutton(){
     this._sidebar.classList.toggle("active");
     this._togglebtn.classList.toggle("hidden");
 }
-
+ _checkForms(){
+let check = true
+  const  input=  document.querySelector("input")
+    if(input.value===""){
+        input.classList.add("fail");
+        input.placeholder="Username cannot be empty"
+        check= false;
+    }
+    console.log(input);
+    console.log(check);
+    return check
+ }
 addFormdata(handler){
     this._form=document.querySelector(".form-group")
     this._difficulty =  document.querySelector("#difficulty");
@@ -163,16 +177,21 @@ addFormdata(handler){
      this._form.addEventListener("submit" , (e)=>{
 
          e.preventDefault();
+         if(!this._checkForms())return;
+              this.renderSpinner();//
          const formdata = new FormData(this._form)
        let data = [...formdata , this._difficulty.value , this._amount.value]
     
           console.log(data);
       handler(data)
-        
-
+           setTimeout(this._removeSpinner.bind(this), 3000)
+           setTimeout(this._addDOne.bind(this), 3000)
      })
-
+      
 }
+_addDOne(){
+    document.querySelector(".done").classList.remove("hidden1"); //makes user aware the update is done
+   }
 }
 
 export default new Sidebar();

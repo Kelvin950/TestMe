@@ -1,4 +1,4 @@
-import {fetchQuestion , CategoryNum ,PageNumber , questionsPerPage } from "./helper.js"
+import {fetchQuestion , CategoryNum ,PageNumber , questionsPerPage ,delay , AmountOfQuesions ,Difficulty } from "./helper.js"
 export const state={
 
     questionArray:[],
@@ -6,24 +6,59 @@ export const state={
     page:PageNumber,
     numQuestions:questionsPerPage,
     userdata:{
-        
+        totalScore:0,
+        amount:AmountOfQuesions,
+        difficulty:Difficulty
     },
     questionArrayDocs:[],
+    
 }
 
 //get questions from API
- export const getquestion  = async function(categoryp){
+ export const getquestion  = async function(categoryp , amount , difficulty){
 
+    try{
      state.category =  categoryp
 
-     const data =  await fetchQuestion(state.category)
+     const data =  await fetchQuestion(state.category , state.userdata.amount,state.userdata.difficulty)
        state.questionArray =  data.results;//save questions to state
        //append correct answer to incorrect answers
        state.questionArray.forEach(question => question.incorrect_answers.push(question.correct_answer))
-   
+    }catch(err){
+        throw err;
+    }
 }
 
 //push questions into new arrray
+export const pushQuestions = function(){
+
+    state.questionArray.forEach((v, index)=>{
+
+        state.questionArrayDocs.push(`<div class="question">
+        <p>${atob(v.question)}</p>
+            <div class="answer">
+            <label>
+            ${v.incorrect_answers.map((i)=>{
+            
+             return `<div>
+                <label>
+             <input type = "radio" name="${index}" value="${atob(i)}" /> <label for="answers">${atob(i)}</label>
+             </label>
+             </div> `
+                
+                
+            }).join("")}
+           
+            </div>
+            </div>
+        `)
+
+    })
+}
+
+
+
+
 
 
 export const pagination  = function(page =  state.page){
@@ -32,8 +67,9 @@ export const pagination  = function(page =  state.page){
 
     const start= (state.page-1)*state.numQuestions;
     const end = state.page* state.numQuestions;
-
-    console.log(state.questionArrayDocs ,"WE");
+    
+          
+    console.log(state.questionArrayDocs);
  return state.questionArrayDocs.slice(start , end);
 
 }
@@ -60,5 +96,6 @@ export const getUserData= function(){
    const storage= localStorage.getItem("userdata" );
    if(storage) state.userdata = JSON.parse(storage);
 }
+
 
 getUserData();
