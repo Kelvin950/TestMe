@@ -1,6 +1,6 @@
 
 import quizView from "./quizView"
-import {controlSubmit} from "../controller"
+
 class Pagination{
 
 
