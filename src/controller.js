@@ -68,3 +68,4 @@ quizView.addHandlerReloadSub();
 
 quizView.createObserver();
 quizView.AddHandlerclearMainview();
+console.log("Welcome");
