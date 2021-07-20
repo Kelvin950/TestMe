@@ -134,6 +134,18 @@ img[alt="userimage"]{
     background-color: red;
     margin: 10px;
 }
+.baryellow{
+    width: 70%;
+    height: 20px;
+    background-color: yellow;
+    margin: 10px;
+}
+.bargreen{
+    width: 70%;
+    height: 20px;
+    background-color: green;
+    margin: 10px;
+}
 
 img[alt="Profileimgage"]{
       
@@ -373,3 +385,24 @@ font-size:  100px;
     color:#ff0000;
     font-family: 'Lora', serif;
 }
+
+.reload button{
+    width: 100%;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #8e44ad ;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+
+.reload button:active{
+    position:relative;
+    top:3px;
+}
+
+.lazy-img {
+    filter: blur(20px);
+  }
+  

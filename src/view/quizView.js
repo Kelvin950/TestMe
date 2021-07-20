@@ -14,6 +14,7 @@ class QuizView extends View{
         this._num =[]
         this._questionData = 0;
         this._scoreEL  =  document.querySelector(".score");
+        this._scoreEL1  =  document.querySelector(".score1");
          this._time=120;
          this._timeContainer =    document.querySelector(".time")
     }
@@ -42,7 +43,7 @@ class QuizView extends View{
         const markup  =this._markup();
         this._clear();
             this._setActive();
-           
+              this._removeSidebar();
         this._parentElem.insertAdjacentHTML("afterbegin" , markup);
         
         paginationView.render(this._data);
@@ -105,7 +106,7 @@ class QuizView extends View{
                     model.SaveUserdata();
                     console.log(score);
                     //create markup base on score
-                   markup=` ${(score> 0.5*  this._data.questionArray.length)?`
+                   markup=` ${(score> Math.floor(0.5*  this._data.questionArray.length))?`
                    
                     <h3> <i class="fas fa-check win"></i>${score} out ${this._data.questionArray.length} Good</h3>` :`
                     <i class="fas fa-poop lose"></i>
@@ -114,13 +115,15 @@ class QuizView extends View{
 
                 }
                 this._unclear();
-            this._scoreEL.innerHTML="";
-            this._scoreEL.insertAdjacentHTML("afterbegin" , markup);
+           this._scoreEL1.innerHTML="";
+            this._scoreEL1.insertAdjacentHTML("afterbegin" , markup);
             this._scoreEL.classList.remove("hidden1");
 
        }
        _addTotalScore(){
-           (this._data.userdata.totalScore)=this._data.userdata.totalScore+this._addScore();
+           const score =  this._addScore();
+           console.log(score);
+           (this._data.userdata.totalScore)=this._data.userdata.totalScore+score
            console.log( this._data.userdata.totalScore);
        }
 
@@ -155,11 +158,17 @@ class QuizView extends View{
             if(this._time<0){
         
         this._timeContainer.innerHTML=" time is up";
+        this._submit();     
+    }
     
-    this._submit();}
+   
         }
         this._time -=1;
      
+      }
+
+      initializeNumArray(){
+        this._num =  new Array(this._data.questionArray.length).fill(0);
       }
 }
 

@@ -1,14 +1,13 @@
 
 import View from "./View"
 import photo from "url:../img/photo_2021-07-15_11-12-06.jpg"
-
+///import cryptoRandomString from 'crypto-random-string';
 class Sidebar extends View{
 
 
     constructor(){
                    super();
-        this._togglebtn =  document.querySelector(".toggle-btn");
-       this._sidebar =  document.querySelector(`#sidebar`);
+       
        this._form =  0;
        this._nav=  document.querySelector(".navigation");
        this._difficulty = 0;
@@ -23,7 +22,7 @@ class Sidebar extends View{
        
 
     }
-    addhandler(handler , handler2){
+    addhandler(handler , handler2 , handler3){
             this._nav.addEventListener("click" , (e)=>{
                 
                 if(e.target.classList.contains("Profile")){ handler();
@@ -31,6 +30,7 @@ class Sidebar extends View{
                 else if(e.target.classList.contains("settings1")){
                     handler2();
                 }
+                else if(e.target.classList.contains("quiz")){handler3()}
                 else return;
 
 
@@ -49,17 +49,18 @@ class Sidebar extends View{
         </div>
             <div class="userdetails">
                 <p>
-                  ${(this._data.name)?this._data.name:"random"}
+                  ${(this._data.name)?this._data.name:"Random"}
+                    
                 </p>
                   
                 <p>
                     Difficulty : <span class="difficulty">${(this._data.difficulty)?this._data.difficulty:"easy"}</span>
                 </p>
                 <p>
-                ${(this._data.totalScore)?this._data.totalScore:0}
+               Totalscore: ${(this._data.totalScore)?this._data.totalScore:0}
                 </p>
 
-                <div class="bar">
+                <div class="bar scorelevel">
                        
                 </div>
             </div>
@@ -143,8 +144,9 @@ class Sidebar extends View{
          const markup =  this._markupProfile();
         this._togglebutton();
         this.hidePagbutton();
+       
          this._parentElem.insertAdjacentHTML("afterbegin" , markup)
-
+         this._generateBar();
 
     }
     renderSettings(){
@@ -154,10 +156,7 @@ class Sidebar extends View{
         this.hidePagbutton();
         this._parentElem.insertAdjacentHTML("afterbegin" , markup)
     }
-_togglebutton(){
-    this._sidebar.classList.toggle("active");
-    this._togglebtn.classList.toggle("hidden");
-}
+
  _checkForms(){
 let check = true
   const  input=  document.querySelector("input")
@@ -191,6 +190,16 @@ addFormdata(handler){
 }
 _addDOne(){
     document.querySelector(".done").classList.remove("hidden1"); //makes user aware the update is done
+   }
+   _generateBar(){
+       if(this._data.totalScore >=10&& this._data.totalScore<50 ){
+           document.querySelector(".scorelevel").classList.remove("bar" , "bargreen");
+           document.querySelector(".scorelevel").classList.add("baryellow");
+       }
+       if(this._data.totalScore >=50 ){
+        document.querySelector(".scorelevel").classList.remove("bar" , "baryellow");
+        document.querySelector(".scorelevel").classList.add("bargreen");
+    }
    }
 }
 

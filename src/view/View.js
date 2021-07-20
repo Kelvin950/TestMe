@@ -1,5 +1,10 @@
 
 
+import photo from "url:../img/photo_2021-07-15_11-12-06.jpg"
+import sport from "url:../img/merlin_153612873_5bb119b9-8972-4087-b4fd-371cab8c5ba2-superJumbo.jpg";
+import music from "url:../img/axel-antas-bergkvist-UOGFqFfUD0A-unsplash.jpg";
+import books from "url:../img/shayna-douglas-TQV8qkwuEzA-unsplash.jpg";
+import movies from "url:../img/serge-kutuzov-meqVd5zwylI-unsplash.jpg";
 export default class View{
 
 
@@ -11,11 +16,20 @@ export default class View{
         this._data=0;
         this._errorMSg  = "No connection";
         this._pag =  document.querySelector("#kel");
+        this._reloadButton =  document.querySelector(".reload");
+        this._togglebtn =  document.querySelector(".toggle-btn");
+        this._sidebar =  document.querySelector(`#sidebar`);
+        this._imgTargets =  document.querySelectorAll('.img[data-src]');
+        this._sourceArray = [sport , music ,books , movies];
     }
     _clear(){
         this._spinner.classList.add("hidden1")
         this._overlay.classList.add("hidden1")
         this._parentElem.innerHTML="";
+    }
+    _togglebutton(){
+        this._sidebar.classList.toggle("active");
+        this._togglebtn.classList.toggle("hidden");
     }
     renderSpinner(){
         this._spinner.classList.remove("hidden1");
@@ -51,6 +65,49 @@ export default class View{
          }
          hidePagbutton(){
              this._pag.classList.add("hidden1")
+         }
+         reloadHomePage(){
+             location.reload();
+         }
+         addHandlerReloadSub(){
+             
+            this._reloadButton.addEventListener("click", ()=>{
+                this.reloadHomePage();
+
+
+
+            })
+         }
+         _removeSidebar(){
+            this._sidebar.classList.remove("active");
+            this._togglebtn.classList.add("hidden");
+         }
+         _loadimg(entries ,observer){
+            const [entry]=  entries;
+
+  if(!entry.isIntersecting)return;
+  console.log(entry);
+
+  console.log(entry.target);
+  console.log(entry.target.dataset.src);
+  const source = +entry.target.dataset.src;
+  console.log(source);
+  entry.target.src =  this._sourceArray[source];
+
+ 
+    entry.target.classList.remove("lazy-img");
+  
+  observer.unobserve(entry.target);
+         }
+         createObserver(){
+            const imgObserver =  new IntersectionObserver(this._loadimg.bind(this) , {
+                threshold:[ 0.25, 0.5, 0.75, 1],
+                rootMargin:'20px'
+                })
+                console.log(this._imgTargets);
+                imgObserver.observe(this._imgTargets[2]);
+                this._imgTargets.forEach(img => imgObserver.observe(img));
+              
          }
 }
 

@@ -14,5 +14,9 @@
     "@parcel/transformer-image": "^2.0.0-beta.2",
     "install": "^0.13.0",
     "parcel": "^2.0.0-beta.2"
+  },
+  "dependencies": {
+    "crypto-random-string": "^4.0.0",
+    "randomstring": "^1.2.1"
   }
 }

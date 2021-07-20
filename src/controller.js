@@ -7,6 +7,10 @@ import  *  as model from "./model.js"
 //controller
 
 
+if(module.hot){
+    module.hot.accept();
+  }  
+  
 sidebarView.addsidebarhandler();
 const  controlQuizView = async function(category){
 try{
@@ -14,15 +18,18 @@ try{
 
     await model.getquestion(category);
     model.pushQuestions()
-    quizView._num =  new Array(model.state.questionArray.length).fill(0);
+
 console.log(model.state.questionArray);
 
 quizView.render(model.pagination(model.state.page) ,model.state );
+quizView.initializeNumArray();
 quizView.addCheckAnswersHandler();
 
 }catch(err){
     console.log(err);
-    quizView.renderError(err.message) //
+    quizView.renderError(err.message) ;
+    //
+   
 }
 }
 
@@ -35,6 +42,9 @@ const controlPagination =function(goto){
 
 const controlProfile=function(){
     sidebarView.renderProfile(model.state.userdata);
+}
+const controlHome =  function(){
+    sidebarView.reloadHomePage();
 }
 const controldata =function(data){
     const userdata= data;
@@ -54,6 +64,8 @@ paginationView.addHandlerPagination(controlPagination);
 
 quizView.addQuizHandler(controlQuizView);
 //quizView.addCheckAnswersHandler(model.state.questionArray);
-sidebarView.addhandler(controlProfile , controlSettings);
+sidebarView.addhandler(controlProfile , controlSettings , controlHome);
+quizView.addHandlerReloadSub();
 
+quizView.createObserver();
 quizView.AddHandlerclearMainview();
