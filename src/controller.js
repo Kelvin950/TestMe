@@ -1,5 +1,5 @@
 
-import sidebarView, {Sidebar} from "./view/sidebarView.js";
+import sidebarView from "./view/sidebarView.js";
 import paginationView from "./view/paginationView";
 import quizView from "./view/quizView.js"
 import {delay} from "./helper.js"
