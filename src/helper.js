@@ -21,7 +21,7 @@ export const tooLong = function(){
 export const fetchQuestion = async function(category, amount,difficulty){
 
     try{
-console.log(amount);
+
         const fetch1 = fetch(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&encode=base64`);
     
         const res =  await Promise.race([fetch1 ,tooLong() ])

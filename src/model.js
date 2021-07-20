@@ -68,8 +68,7 @@ export const pagination  = function(page =  state.page){
     const start= (state.page-1)*state.numQuestions;
     const end = state.page* state.numQuestions;
     
-          
-    console.log(state.questionArrayDocs);
+        
  return state.questionArrayDocs.slice(start , end);
 
 }

@@ -4,12 +4,11 @@ import paginationView from "./view/paginationView";
 import quizView from "./view/quizView.js"
 import {delay} from "./helper.js"
 import  *  as model from "./model.js"
+
 //controller
 
 
-if(module.hot){
-    module.hot.accept();
-  }  
+
   
 sidebarView.addsidebarhandler();
 const  controlQuizView = async function(category){
@@ -19,14 +18,14 @@ try{
     await model.getquestion(category);
     model.pushQuestions()
 
-console.log(model.state.questionArray);
+
 
 quizView.render(model.pagination(model.state.page) ,model.state );
 quizView.initializeNumArray();
 quizView.addCheckAnswersHandler();
 
 }catch(err){
-    console.log(err);
+
     quizView.renderError(err.message) ;
     //
    

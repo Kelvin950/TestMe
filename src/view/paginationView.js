@@ -15,7 +15,7 @@ class Pagination{
         this._parentELem.addEventListener("click" , (e)=>{
               e.preventDefault();
               if(!e.target.classList.contains("buttn"))return
-                console.log(e.target);
+             
               const {goto}  =  e.target.dataset;
               handler(+goto);
 
@@ -51,7 +51,7 @@ class Pagination{
         this._data = data;
     
         const markup  =this._markup()
-      console.log(this._parentELem);
+     
        this._parentELem.innerHTML=""
       this._parentELem.insertAdjacentHTML("afterbegin" , markup)
       if(this._parentELem.lastChild.classList.contains("submit")){quizView.addHandlerSubmit()}

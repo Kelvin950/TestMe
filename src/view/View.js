@@ -21,11 +21,15 @@ export default class View{
         this._sidebar =  document.querySelector(`#sidebar`);
         this._imgTargets =  document.querySelectorAll('.img[data-src]');
         this._sourceArray = [sport , music ,books , movies];
+        this._timeContainer =    document.querySelector(".time")
     }
     _clear(){
         this._spinner.classList.add("hidden1")
         this._overlay.classList.add("hidden1")
         this._parentElem.innerHTML="";
+    }
+    _hideTimer(){
+        this._timeContainer.classList.add("hidden1");
     }
     _togglebutton(){
         this._sidebar.classList.toggle("active");
@@ -80,23 +84,25 @@ export default class View{
          }
          _removeSidebar(){
             this._sidebar.classList.remove("active");
-            this._togglebtn.classList.add("hidden");
+            this._togglebtn.classList.add("hidden1");
          }
          _loadimg(entries ,observer){
             const [entry]=  entries;
 
   if(!entry.isIntersecting)return;
-  console.log(entry);
+  
 
-  console.log(entry.target);
-  console.log(entry.target.dataset.src);
+  
+
   const source = +entry.target.dataset.src;
-  console.log(source);
+
   entry.target.src =  this._sourceArray[source];
 
- 
+ entry.target.addEventListener("load",()=>{
     entry.target.classList.remove("lazy-img");
   
+ })
+ 
   observer.unobserve(entry.target);
          }
          createObserver(){
@@ -104,7 +110,7 @@ export default class View{
                 threshold:[ 0.25, 0.5, 0.75, 1],
                 rootMargin:'20px'
                 })
-                console.log(this._imgTargets);
+              
                 imgObserver.observe(this._imgTargets[2]);
                 this._imgTargets.forEach(img => imgObserver.observe(img));
               

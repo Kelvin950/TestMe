@@ -16,7 +16,7 @@ class QuizView extends View{
         this._scoreEL  =  document.querySelector(".score");
         this._scoreEL1  =  document.querySelector(".score1");
          this._time=120;
-         this._timeContainer =    document.querySelector(".time")
+         
     }
 
     addQuizHandler(handler){
@@ -24,7 +24,7 @@ class QuizView extends View{
              if(!e.target.classList.contains("img"))return
        
              const img =  e.target;
-             console.log(img);
+           
              let  {category} =  img.dataset;
            category =  String(category);
            setInterval(this._timer.bind(this) , 1000);
@@ -37,9 +37,7 @@ class QuizView extends View{
         this._questionData =  data;
         this._data = state;
       
-        console.log(this._num);
-        console.log(this._questionData);
-        console.log(this._data);
+      
         const markup  =this._markup();
         this._clear();
             this._setActive();
@@ -50,7 +48,7 @@ class QuizView extends View{
         
     }
     _addScore(){
-    console.log(this._num);
+
        return this._num.reduce(( total,v)=>{
         return total+v;
         },0)
@@ -64,19 +62,17 @@ class QuizView extends View{
        addCheckAnswersHandler(){
            document.querySelector(".mainview").addEventListener("click" , (e)=>{
            if(e.target.type!=="radio")return;
-           console.log(  this._data.questionArray);
-           console.log(e.target.value , e.target.name);
-               console.log(  this._data.questionArray[e.target.name]);
+        
                const obj =   this._data.questionArray[e.target.name];
                   if(atob(obj.correct_answer) === e.target.value){
          
-                         console.log(e.target.name);
+                        
                          this._num[e.target.name] = this._num[e.target.name]+1;
-                         console.log( this._num[e.target.name]);
+                         
                   }else{
                       if(   this._num[e.target.name] >0)
                     this._num[e.target.name] = this._num[e.target.name]-1;
-                    console.log( this._num[e.target.name]);
+                   
                   }
           
            })
@@ -93,7 +89,7 @@ class QuizView extends View{
        //delays renderScore
         }
            catch(err){
-               console.log(err);
+              
                this.renderError();
            }
        }
@@ -104,7 +100,7 @@ class QuizView extends View{
                   const  score =  this._addScore();
                   this._addTotalScore();
                     model.SaveUserdata();
-                    console.log(score);
+                  
                     //create markup base on score
                    markup=` ${(score> Math.floor(0.5*  this._data.questionArray.length))?`
                    
@@ -122,9 +118,9 @@ class QuizView extends View{
        }
        _addTotalScore(){
            const score =  this._addScore();
-           console.log(score);
+          
            (this._data.userdata.totalScore)=this._data.userdata.totalScore+score
-           console.log( this._data.userdata.totalScore);
+          
        }
 
        addHandlerSubmit(){

@@ -49,7 +49,7 @@ class Sidebar extends View{
         </div>
             <div class="userdetails">
                 <p>
-                  ${(this._data.name)?this._data.name:"Random"}
+                  ${(this._data.name)?this._data.name:this._generateRandom(7)}
                     
                 </p>
                   
@@ -144,9 +144,10 @@ class Sidebar extends View{
          const markup =  this._markupProfile();
         this._togglebutton();
         this.hidePagbutton();
-       
+     
          this._parentElem.insertAdjacentHTML("afterbegin" , markup)
          this._generateBar();
+         this._hideTimer();
 
     }
     renderSettings(){
@@ -154,6 +155,7 @@ class Sidebar extends View{
         this._togglebutton();
         const markup =  this._markupsettings();
         this.hidePagbutton();
+        this._hideTimer();
         this._parentElem.insertAdjacentHTML("afterbegin" , markup)
     }
 
@@ -165,8 +167,7 @@ let check = true
         input.placeholder="Username cannot be empty"
         check= false;
     }
-    console.log(input);
-    console.log(check);
+  
     return check
  }
 addFormdata(handler){
@@ -181,7 +182,7 @@ addFormdata(handler){
          const formdata = new FormData(this._form)
        let data = [...formdata , this._difficulty.value , this._amount.value]
     
-          console.log(data);
+    
       handler(data)
            setTimeout(this._removeSpinner.bind(this), 3000)
            setTimeout(this._addDOne.bind(this), 3000)
@@ -200,6 +201,20 @@ _addDOne(){
         document.querySelector(".scorelevel").classList.remove("bar" , "baryellow");
         document.querySelector(".scorelevel").classList.add("bargreen");
     }
+   }
+   _generateRandom(length){
+    const characters='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    
+        let result = ' ';
+        const charactersLength = characters.length;
+        for ( let i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+    
+        return result;
+    
+
    }
 }
 
