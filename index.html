@@ -36,26 +36,28 @@
             
                 
             <div class="navbar">
-            
-                <div class="userimg">
-               <h4><i class="fas fa-book-reader"></i>TESTME</h4> 
+                <div class="toggle-btn">
+                    <span></span> <span></span> <span></span>
                 </div>
+              <div class="userimg">
+             
+             <p><i class="fas fa-brain">TESTME</i></p>
+              </div>
             </div>   
             </div>
 
             <div id="sidebar">
-                <div class="toggle-btn">
-                    <span></span> <span></span> <span></span>
-                </div>
+                
                     <div class="navigation">
                     <ul>
                       
-                        
+                        <button class="closesidebar btn btn-dark"><i class="far fa-window-close"></i></button>
                         <li class="quiz"> <i class="fas fa-pen-fancy"></i> Quiz</li>
                         <li class="Profile"> <i class="fas fa-user-circle"></i> Profile</li>
                         <li class="settings1"><i class="fas fa-cog"></i> Settings</li>
                        
                     </ul>
+                    
                 </div>
     
                 
@@ -244,6 +246,11 @@
 <div class="done hidden1">
 
  <h3> <i class="fas fa-check win"></i>Done</h3>
+</div>
+<div class="startquiz hidden1">
+    <h3>Click start to begin quiz</h3>
+    <button value="cancel" class="cancel btn btn-danger">cancel</button>
+    <button value="Start" class="start" data-category="0">Start Quiz</button>
 </div>
     </body>
     </html>

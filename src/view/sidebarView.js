@@ -12,6 +12,7 @@ class Sidebar extends View{
        this._nav=  document.querySelector(".navigation");
        this._difficulty = 0;
        this._amount= 0;
+       this._closeSidebar=  document.querySelector(".closesidebar")
     }
 
     addsidebarhandler(){
@@ -21,6 +22,11 @@ class Sidebar extends View{
         })
        
 
+    }
+    addcloseSideBar(){
+              this._closeSidebar.addEventListener("click", ()=>{
+                  this._togglebutton();
+              })
     }
     addhandler(handler , handler2 , handler3){
             this._nav.addEventListener("click" , (e)=>{
@@ -75,7 +81,7 @@ class Sidebar extends View{
 
                     <div class="form-design">
                         <label>Username</label>
-                        <input type="text" name="username" placeholder="username">
+                        <input type="text" name="username" placeholder="username" value=${(this._data.name)?this._data.name:""}>
                          
 
                     </div>

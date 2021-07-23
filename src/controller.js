@@ -11,8 +11,10 @@ import  *  as model from "./model.js"
 
   
 sidebarView.addsidebarhandler();
+sidebarView.addcloseSideBar();
 const  controlQuizView = async function(category){
 try{
+    quizView.removeStart();
    quizView.renderSpinner();
 
     await model.getquestion(category);
@@ -60,7 +62,7 @@ const controlSettings=  function(){
 }
 
 paginationView.addHandlerPagination(controlPagination);
-
+quizView.startQuiz();
 quizView.addQuizHandler(controlQuizView);
 //quizView.addCheckAnswersHandler(model.state.questionArray);
 sidebarView.addhandler(controlProfile , controlSettings , controlHome);

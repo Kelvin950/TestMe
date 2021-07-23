@@ -21,7 +21,9 @@ export default class View{
         this._sidebar =  document.querySelector(`#sidebar`);
         this._imgTargets =  document.querySelectorAll('.img[data-src]');
         this._sourceArray = [sport , music ,books , movies];
-        this._timeContainer =    document.querySelector(".time")
+        this._timeContainer =    document.querySelector(".time");
+        this._starQuiz= document.querySelector(".startquiz");
+        this._cancel =  document.querySelector(".cancel");
     }
     _clear(){
         this._spinner.classList.add("hidden1")
@@ -47,6 +49,19 @@ export default class View{
         this._overlay.classList.remove("hidden1");
         this._spinner.classList.add("hidden1");
     }
+    _showStart(){
+        this._overlay.classList.remove("hidden1");
+        this._starQuiz.classList.remove("hidden1");
+    }
+    removeStart(){
+        this._overlay.classList.add("hidden1");
+        this._starQuiz.classList.add("hidden1");
+    }
+    _cancelStart(){
+        this._cancel.addEventListener("click", ()=>{
+            this.removeStart();
+        })
+    }
         renderError(err){
          // this._errorMSg = err
           
@@ -65,6 +80,7 @@ export default class View{
             this._parentElem.addEventListener("click" ,()=>{
                 document.querySelector(".done").classList.add("hidden1");
                 document.querySelector(".error").classList.add("hidden1");
+              
             })
          }
          hidePagbutton(){

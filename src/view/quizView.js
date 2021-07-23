@@ -16,20 +16,35 @@ class QuizView extends View{
         this._scoreEL  =  document.querySelector(".score");
         this._scoreEL1  =  document.querySelector(".score1");
          this._time=120;
-         
+         this._btnStart  = document.querySelector(".start");
+      
     }
 
     addQuizHandler(handler){
-        this._parentElem.addEventListener("click" , (e)=>{
-             if(!e.target.classList.contains("img"))return
+        this._btnStart.addEventListener("click" , (e)=>{
+          
        
-             const img =  e.target;
+             
            
-             let  {category} =  img.dataset;
+             let  {category} =  this._btnStart.dataset;
            category =  String(category);
            setInterval(this._timer.bind(this) , 1000);
          
             handler(category)
+        })
+    }
+    startQuiz(){
+        this._parentElem.addEventListener("click", (e)=>{
+            if(!e.target.classList.contains("img"))return
+       
+            const img =  e.target;
+          
+            let  {category} =  img.dataset;
+            category =  String(category);
+                this._btnStart.dataset.category  =  category;
+                this._showStart();
+                this._cancelStart();
+
         })
     }
     render(data , state){
@@ -42,6 +57,7 @@ class QuizView extends View{
         this._clear();
             this._setActive();
               this._removeSidebar();
+              
         this._parentElem.insertAdjacentHTML("afterbegin" , markup);
         
         paginationView.render(this._data);
