@@ -38,7 +38,9 @@ export const pushQuestions = function(){
         <p>${atob(v.question)}</p>
             <div class="answer">
             <label>
-            ${v.incorrect_answers.map((i)=>{
+            ${v.incorrect_answers.map(i=>({value:i , number:Math.random()})).sort((obj1 , obj2)=>{
+                return obj1.number - obj2.number;
+            }).map(obj=>obj.value).map((i)=>{
             
              return `<div>
                 <label>
